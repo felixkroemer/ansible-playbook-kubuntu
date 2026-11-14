@@ -48,6 +48,11 @@
       state: present
     loop: "{{ snap_packages }}"
 
+  - name: Install opencode
+    shell: bash -o pipefail -c 'curl -fsSL https://opencode.ai/v2/install | bash'
+    args:
+      creates: "{{ ansible_env.HOME }}/.opencode/bin/opencode"
+
   - name: Ensure destination directories exist
     file:
       path: "{{ item.dest | dirname }}"
